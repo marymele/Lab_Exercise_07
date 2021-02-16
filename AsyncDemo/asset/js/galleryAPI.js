@@ -3,37 +3,38 @@ var isActive=false;
 
 postImage();
 async function fetchImage(){
-    let res=await fetch('https://picsum.photos/200/300?grayscale');
-    let data=await res.json()
+    let res=await fetch('https://picsum.photos/2000/1000?grayscale');
+    let data=await res.blob()
     return data;
 }
 
 
 
 function postImage(){
-    fetchImage().then(function(images){
-        let img='';
-        let slide='';
-        images.forEach(function(image){
-            img=image.download_url;
-
+    let slide='';
+    for(let i=0;i<50;i++){
+        fetchImage().then(function(image){
+            let outside = URL.createObjectURL(image)
+           
             if(!isActive){
                 slide+=`<div class="carousel-item active">
-                <img class="d-block" src="${img}" alt="First slide" width = 60% height=600px>
+                <img class="d-block w-100" src="${outside}" alt="First slide" width = 100% height=600px>
                 </div>`
                 isActive=true
-                continue
+               
+            }
+            else{
+                slide+=`<div class="carousel-item">
+                <img class="d-block w-100" src="${outside}" alt="Slide" width = 100% height=600px>
+                </div>`
             }
             
-            slide+=`<div class="carousel-item">
-            <img class="d-block" src="${img}" alt="Slide" width = 60% height=600px>
-            </div>`
-
-
-
-        });  imgFrame.innerHTML=slide;
-    })
-    .catch(function(err){
-        console.log(err);
-    })
+    
+             imgFrame.innerHTML=slide;
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+    }
+   
 }
