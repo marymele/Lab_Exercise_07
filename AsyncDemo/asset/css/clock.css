@@ -1,0 +1,38 @@
+html, body{
+	height: 100%;
+    
+}
+
+.container {
+    height: 100%;
+    size: 70%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.clock {
+	position: relative;   
+    border-radius: 50%; 
+	width: 600px;
+	height: 600px;
+	background: url(../images/clock_background.jpg);
+}
+
+.clock:after {
+	position: absolute;
+	content: '';
+	background: #000;
+	width: 30px;
+	height: 30px;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	border-radius: 50%;
+}
+
+.hands {
+	position: absolute;
+	top: 16%;
+	left: 17%;
+}
